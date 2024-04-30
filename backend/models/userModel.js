@@ -21,7 +21,17 @@ const userSchema = new mongoose.Schema({
     },
     categoryBudgets: {
         type: Map,
-        of: Number
+        of: Number,
+        default: {
+            "Food & Dining": 0,
+            "Housing": 0,
+            "Transportation": 0,
+            "Healthcare": 0,
+            "Entertainment": 0,
+            "Utilities": 0,
+            "Personal Care": 0,
+            "Others": 0
+        }
     },
     expenses: [{
         type: mongoose.Schema.Types.ObjectId,
