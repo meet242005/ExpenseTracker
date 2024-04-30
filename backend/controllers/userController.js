@@ -1,6 +1,17 @@
 const User = require('../models/userModel');
 const Expense = require('../models/expenseModel');
 
+const expenseCategories = [
+    "Food & Dining",
+    "Housing",
+    "Transportation",
+    "Healthcare",
+    "Entertainment",
+    "Utilities",
+    "Personal Care",
+    "Others"
+];
+
 exports.createUser = async (req, res) => {
     try {
         const newUser = await User.create(req.body);
@@ -42,8 +53,7 @@ exports.loadUser = async (req, res) => {
 
 exports.updateBudget = async (req, res) => {
     try {
-        const { id, monthlyBudget } = req.body;
-
+        const { id, monthlyBudget, categoryBudgets } = req.body;
 
         const user = await User.findById(id);
 
@@ -55,6 +65,10 @@ exports.updateBudget = async (req, res) => {
         }
 
         user.monthlyBudget = monthlyBudget;
+        if (categoryBudgets) {
+            user.categoryBudgets = categoryBudgets;
+        }
+        
         const updatedUser = await user.save();
 
         res.status(200).json({
@@ -69,16 +83,6 @@ exports.updateBudget = async (req, res) => {
     }
 };
 
-const expenseCategories = [
-    "Food & Dining",
-    "Housing",
-    "Transportation",
-    "Healthcare",
-    "Entertainment",
-    "Utilities",
-    "Personal Care",
-    "Others"
-];
 
 
 exports.loadStats = async (req, res) => {
@@ -130,6 +134,7 @@ exports.loadStats = async (req, res) => {
             });
         }
         const monthlyBudget = user.monthlyBudget || 0;
+        const categoryBudgets = user.categoryBudgets || {};
 
         res.status(200).json({
             status: 'success',
@@ -137,7 +142,9 @@ exports.loadStats = async (req, res) => {
                 totalMonthlySpend,
                 categorySpends,
                 totalSpendAllTime,
-                monthlyBudget
+                monthlyBudget,
+                categoryBudgets
+
             }
         });
     } catch (err) {

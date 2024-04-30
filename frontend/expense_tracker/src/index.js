@@ -11,7 +11,7 @@ function RouteApp() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SetBudget />} />
+        <Route path="/" element={<App/>} />
         {/* <Route path="posts" element={<PostDetail />} />
         <Route path="author" element={<AuthorDetails />} /> */}
       </Routes>
