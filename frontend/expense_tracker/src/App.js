@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from 'react';
+import SideDrawer from './components/SideDrawer';
 
-function App() {
+const App = () => {
+
+
   return (
-    <div className="bg-red-100 p-4">
-      <h1 className="text-2xl font-bold text-gray-800">Hello, Tailwind CSS!</h1>
-      <p className="text-red-600">
-        This is a React app styled with Tailwind CSS.
-      </p>
+    <div className="flex  bg-blue-700">
+   
+      <SideDrawer isOpen={true}  />
+      <div className="my-1.5  bg-white rounded-tl-3xl rounded-bl-3xl px-4 py-4   w-full">
+       <h1>Heading</h1>
+       <h1>asfs</h1>
+      </div>
+    
     </div>
   );
-}
+};
 
 export default App;
