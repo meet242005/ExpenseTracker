@@ -51,6 +51,30 @@ exports.loadUser = async (req, res) => {
     }
 };
 
+exports.loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne(Expense.where({ email, password }));
+
+        if (!user) {    
+            return res.status(404).json({
+                status: 'error',
+                message: 'User not found'
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: user
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'error',
+            message: err.message
+        });
+    }
+};
+
 exports.updateBudget = async (req, res) => {
     try {
         const { id, monthlyBudget, categoryBudgets } = req.body;

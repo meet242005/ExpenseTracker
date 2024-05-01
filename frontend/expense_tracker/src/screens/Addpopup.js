@@ -3,7 +3,6 @@ import SideDrawer from "../components/SideDrawer";
 import { createExpense } from "../Api";
 import { toast } from "react-toastify";
 
-
 const AddExpensePopup = () => {
   const userId = "6631684159792de2d56ad20d";
 
@@ -11,18 +10,12 @@ const AddExpensePopup = () => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [isSideDrawerOpen] = useState(true); 
+  const [isSideDrawerOpen] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createExpense(
-      name,
-      amount,
-      description,
-      category,
-      userId
-    );
-    toast.success('Expense Added Successfully! 💰', {
+    createExpense(name, amount, description, category, userId);
+    toast.success("Expense Added Successfully! 💰", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -31,8 +24,7 @@ const AddExpensePopup = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-
-      });
+    });
 
     setName("");
     setAmount("");
