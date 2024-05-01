@@ -42,7 +42,7 @@ const SideDrawer = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`flex flex-col h-screen w-72   bg-blue-700 px-4 py-6 ${
+      className={`flex flex-col justify-between h-screen w-72 bg-blue-700 px-4 py-6 ${
         isOpen ? "block" : "hidden"
       }`}
     >
