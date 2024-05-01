@@ -42,16 +42,21 @@ export const loadStats = async (userId) => {
   return await fetchWithPost(`${SERVER_URL}loadStats`, { id: userId });
 };
 
-export const createExpense = async (name,amount,description,category,userId) => {
+export const createExpense = async (
+  name,
+  amount,
+  description,
+  category,
+  userId
+) => {
   return await fetchWithPost(`${SERVER_URL}addExpense`, {
     name: name,
     amount: amount,
     description: description,
     category: category,
-    "currencyType": "INR",
+    currencyType: "INR",
     user: userId,
   });
-  
 };
 
 export const getExpensesByUser = async (userId, date) => {
