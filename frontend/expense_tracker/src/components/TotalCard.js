@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TotalCard = ({ spends, totalBudget, allTotalSpends }) => {
   // Calculate percentage spent
-  const percentageSpent = (spends / totalBudget) * 100;
+  var percentageSpent = (spends / totalBudget) * 100;
+  if(percentageSpent>100){
+    percentageSpent=100;
+  }
   var progess_class =
     percentageSpent < 50
       ? "h-full bg-white rounded-full"

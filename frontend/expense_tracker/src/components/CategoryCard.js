@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CategoryCard = ({ category, icon, spends, totalBudget }) => {
   // Calculate percentage spent
-  const percentageSpent = (spends / totalBudget) * 100;
+  var percentageSpent = (spends / totalBudget) * 100;
+  if(percentageSpent>100){
+    percentageSpent=100;
+  }
   var progess_class = percentageSpent<50?"h-full bg-green-500 rounded-full":percentageSpent<80?"h-full bg-yellow-500 rounded-full":"h-full bg-red-500 rounded-full";
   return (
     <div className="bg-white shadow-md rounded-xl p-6  w-64   my-2 mx-0.5" >
