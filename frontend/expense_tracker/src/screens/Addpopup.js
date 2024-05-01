@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import SideDrawer from "./SideDrawer";
+import SideDrawer from "../components/SideDrawer";
+import { createExpense } from "../Api";
+import { json } from "react-router-dom";
 
 const AddExpensePopup = () => {
+  const userId = "6631684159792de2d56ad20d";
+
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -10,9 +14,16 @@ const AddExpensePopup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can handle submitting the form data, for example, sending it to an API or performing some action
+    createExpense(
+      name,
+      amount,
+      description,
+      category,
+      userId
+    );
+    window.alert("Expense added successfully!");
     console.log("Submitted:", { name, amount, description, category });
-    // Clear the form fields
+
     setName("");
     setAmount("");
     setDescription("");
@@ -20,16 +31,13 @@ const AddExpensePopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="w-1/4">
-        {/* Render the SideDrawer component with isOpen set to isSideDrawerOpen */}
-        <SideDrawer isOpen={isSideDrawerOpen} />
-      </div>
+    <div className="flex  bg-blue-700">
+      <SideDrawer isOpen={isSideDrawerOpen} />
 
-      <div className="bg-white p-6 rounded-lg w-3/4 ml-4  mr-8 pr-8"> {/* Adjust the width of the form, add left margin, and add right padding */}
+      <div className="my-1.5  bg-gray-50  rounded-tl-3xl rounded-bl-3xl px-4 py-4   w-full">
         <h2 className="text-xl font-bold mb-4">Add Expense</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="name"
@@ -37,15 +45,16 @@ const AddExpensePopup = () => {
               Name
             </label>
             <input
-              className="border rounded w-full py-2 px-3"
+              className="border rounded w-full py-2 px-3 bg-gray-50"
               type="text"
               id="name"
+              placeholder="Enter Expense Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="amount"
@@ -53,15 +62,16 @@ const AddExpensePopup = () => {
               Amount
             </label>
             <input
-              className="border rounded w-full py-2 px-3"
-              type="text"
+              className="border rounded w-full py-2 px-3 bg-gray-50"
+              type="number"
               id="amount"
+              placeholder="Enter Expense Amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="description"
@@ -69,14 +79,15 @@ const AddExpensePopup = () => {
               Description
             </label>
             <textarea
-              className="border rounded w-full py-2 px-3 resize-none"
+              className="border rounded w-full py-2 px-3 h-36 resize-none bg-gray-50"
               id="description"
+              placeholder="Enter Expense Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="category"
@@ -84,13 +95,13 @@ const AddExpensePopup = () => {
               Category
             </label>
             <select
-              className="border rounded w-full py-2 px-3"
+              className="border rounded w-full py-2 px-3 bg-gray-50"
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               required
             >
-              <option value="">Select Category</option>
+              <option value="">Select Expense Category</option>
               <option value="Food & Dining">Food & Dining</option>
               <option value="Housing">Housing</option>
               <option value="Transportation">Transportation</option>
@@ -101,7 +112,7 @@ const AddExpensePopup = () => {
               <option value="Others">Others</option>
             </select>
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-4">
             <button
               type="submit"
               className="px-4 py-2 bg-blue-600 text-white rounded"
