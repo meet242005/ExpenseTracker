@@ -1,6 +1,6 @@
-// const SERVER_URL = 'https://expensetracker-2ru5.onrender.com/api/';
+const SERVER_URL = 'https://expensetracker-2ru5.onrender.com/api/';
 
-const SERVER_URL = "http://localhost:5001/api/";
+// const SERVER_URL = "http://localhost:5001/api/";
 const fetchWithPost = async (url, body) => {
   try {
     const response = await fetch(url, {

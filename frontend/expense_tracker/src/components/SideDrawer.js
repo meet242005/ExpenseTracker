@@ -42,7 +42,7 @@ const SideDrawer = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`flex flex-col h-screen w-72  bg-blue-700 px-4 py-6 ${
+      className={`flex flex-col h-screen w-72   bg-blue-700 px-4 py-6 ${
         isOpen ? "block" : "hidden"
       }`}
     >
@@ -78,21 +78,31 @@ const SideDrawer = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-        
-        
-    
-      <div className="border-t border-gray-300 mb-4"></div>
-      <div className="flex  items-center text-white">
-        <div className="h-10 w-10 bg-blue-500 rounded-full flex justify-center items-center">
-          {getInitials(user == null ? "" : user.username)}
+      <div>
+        <div className="border-t border-gray-300 mb-4"></div>
+        <div className="flex  items-center text-white">
+          <div className="h-10 w-10 bg-blue-500 rounded-full flex justify-center items-center">
+            {getInitials(user == null ? "" : user.username)}
+          </div>
+
+          <span className="ml-2 text-sm">
+            {user?.username}
+            <br></br>
+            <div style={{ fontSize: "12px" }}>{user?.email}</div>
+          </span>
         </div>
-        
-        <span className="ml-2 text-sm">{user?.username}<br></br><div style={{ fontSize: '12px' }}>{user?.email}</div></span>
-        
+
+        <div className="text-l pt-5 text-white flex justify-between">
+          Logout <FontAwesomeIcon className="pt-1" icon={faSignOut} />
+        </div>
+        <div
+          className=" pt-2 text-white flex justify-between"
+          style={{ fontSize: "7px" }}
+        >
+          2023-24, SYB.Tech CE, DJSCE.<br></br> Programming Laboratory - II Web
+          Development Project<br></br> Meet Chavan, Dhruv Mehta, Devesh Bhayani
+        </div>
       </div>
-     
-      <div className="text-l pt-5 text-white flex justify-between">Logout <FontAwesomeIcon className="pt-1" icon={faSignOut} /></div>
-      <div className=" pt-2 text-white flex justify-between" style={{ fontSize: '7px' }}>2023-24, SYB.Tech CE, DJSCE.<br></br> Programming Laboratory - II Web Development Project<br></br> Meet Chavan, Dhruv Mehta, Devesh Bhayani</div>
     </div>
   );
 };

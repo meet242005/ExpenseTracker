@@ -39,7 +39,8 @@ const App = () => {
     try {
       console.log(currentTime)
       const response = await getExpensesByUser(userId, currentTime.toString());
-      setExpenses(response.data);
+      const firstFourExpenses = response.data.slice(0, 4);
+      setExpenses(firstFourExpenses);
       console.log("Expenses:", response.data);
     }
     catch (error) {
@@ -153,10 +154,16 @@ const App = () => {
           className="flex justify-between"
           style={{ overflowX: "auto", whiteSpace: "nowrap" }}
         >
-          <DashboardExpenseCard
-          name={expenses?.[0]?.name}
-          
-          ></DashboardExpenseCard>
+       
+          {expenses?.map((expense) => (
+            <DashboardExpenseCard
+              key={expense._id}
+              name={expense.name}
+              amount={expense.amount}
+              category={expense.category}
+              date={expense.date}
+            />
+          ))}
         </div>
         <h1 className="text-xl mb-2 mt-4 font-semibold text-gray-800">
           Category Spendings
