@@ -3,6 +3,7 @@ import CategoryCard from "./components/CategoryCard";
 import TotalCard from "./components/TotalCard";
 import SideDrawer from "./components/SideDrawer";
 import { PieChart } from "@mui/x-charts/PieChart";
+import {useCookies} from 'react-cookie';
 import moment from 'moment';
 
 import {
@@ -15,11 +16,12 @@ import {
   faUmbrellaBeach,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
-import { loadStats, getExpensesByUser } from "./Api.js";
+import { loadStats, getExpensesByUser, loginUser } from "./Api.js";
 import DashboardExpenseCard from "./components/DashboardExpenseCard.js";
 
 const App = () => {
-  const [userId, setUserId] = useState("6631684159792de2d56ad20d");
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [userId, setUserId] = useState(cookies.userId);
 
   const [stats, setStats] = useState(null);
   const [expenses, setExpenses] = useState(null);
@@ -52,8 +54,10 @@ const App = () => {
     if (userId) {
       fetchStats();
       fetchExpenses();
+    } else {
+     
     }
-  }, [userId]);
+  }, []);
 
   return (
     <div className="flex  bg-blue-700">

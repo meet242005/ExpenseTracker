@@ -3,9 +3,12 @@ import { loadUser } from "../Api";
 import SideDrawer from "../components/SideDrawer";
 import { updateBudget } from "../Api";
 import { toast } from "react-toastify";
+import {useCookies} from 'react-cookie';
 
 const SetBudget = () => {
-  const userId = "6631684159792de2d56ad20d";
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [userId, setUserId] = useState(cookies.userId);
+
   const [totalBudget, setTotalBudget] = useState(0);
   const [user, setUser] = useState(null);
   const [budgets, setBudgets] = useState({

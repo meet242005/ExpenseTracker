@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loadUser } from "../Api";
+import {useCookies} from 'react-cookie';
 import {
   faTachometerAlt,
   faMoneyBillWave,
@@ -12,8 +13,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SideDrawer = ({ isOpen, onClose }) => {
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [userId, setUserId] = useState(cookies.userId);
+  
   const navigate = useNavigate();
-  const userId = "6631684159792de2d56ad20d";
   const [user, setUser] = useState(null);
 
   const loadUserProfile = async () => {
@@ -92,7 +95,7 @@ const SideDrawer = ({ isOpen, onClose }) => {
           </span>
         </div>
 
-        <div className="text-l pt-5 text-white flex justify-between">
+        <div className="text-l pt-5 text-white flex justify-between" onClick={()=>removeCookie("userId")}>
           Logout <FontAwesomeIcon className="pt-1" icon={faSignOut} />
         </div>
         <div

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import SideDrawer from "../components/SideDrawer";
 import { createExpense } from "../Api";
 import { toast } from "react-toastify";
+import {useCookies} from 'react-cookie';
 
 const AddExpensePopup = () => {
-  const userId = "6631684159792de2d56ad20d";
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [userId, setUserId] = useState(cookies.userId);
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
@@ -31,6 +33,7 @@ const AddExpensePopup = () => {
     setDescription("");
     setCategory("");
   };
+
 
   return (
     <div className="flex  bg-blue-700">

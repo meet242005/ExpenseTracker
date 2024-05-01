@@ -26,6 +26,10 @@ export const loadUser = async (userId) => {
   return await fetchWithPost(`${SERVER_URL}loadUser`, { id: userId });
 };
 
+export const loginUser = async (email,password) => {
+  return await fetchWithPost(`${SERVER_URL}loginUser`, { email: email, password: password });
+};
+
 export const updateBudget = async (userId, monthlyBudget, categoryBudgets) => {
   return await fetchWithPost(`${SERVER_URL}updateBudget`, {
     id: userId,
