@@ -180,7 +180,7 @@ const App = () => {
         <h1 className="text-xl mb-2 mt-4 font-semibold text-gray-800">
           Category Spendings
         </h1>
-        <div className="flex flex-wrap justify-around">
+        <div className="flex flex-wrap justify-between">
           {stats?.categorySpends &&
             Object.keys(stats.categorySpends).map((category) => (
               <CategoryCard

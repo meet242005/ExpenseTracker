@@ -4,6 +4,7 @@ import SideDrawer from "../components/SideDrawer";
 import { getExpensesByUser, loadStats } from "../Api";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+import ChipSlider from "../components/chipfilter/chipSlider";
 import {
   faBathtub,
   faCheckCircle,
@@ -48,15 +49,20 @@ const colors = [
 
 const Myexpense = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
-  const [activeTab, setActiveTab] = useState("Food & Dining");
-  const [selectedMonth, setSelectedMonth] = useState("");
+  const [activeTab, setActiveTab] = useState("All");
   const [userId, setUserId] = useState(cookies.userId);
   const [expenses, setExpenses] = useState(null);
+  const [activeMonth, setActiveMonth] = useState(moment().toISOString());
+
+  const handleMonthClick = (clickedMonth) => {
+    setActiveMonth(clickedMonth);
+    //fetchExpenses();
+    console.log("Clicked month:", clickedMonth);
+  };
 
   const fetchExpenses = async () => {
-    const currentTime = moment().toISOString();
     try {
-      const response = await getExpensesByUser(userId, currentTime.toString());
+      const response = await getExpensesByUser(userId, activeMonth.toString());
       setExpenses(response.data);
       console.log("Expenses:", response.data);
     } catch (error) {
@@ -74,50 +80,102 @@ const Myexpense = () => {
     console.log("Active tab changed to:", activeTab);
   }, [activeTab]);
 
+  useEffect(() => {
+    if (activeMonth) {
+      fetchExpenses();
+    }
+  }, [activeMonth]);
+
   return (
-    <>
-      <div className="flex bg-blue-700">
-        <SideDrawer isOpen={true} />
-        <div className="my-1.5  bg-gray-50  rounded-tl-3xl rounded-bl-3xl px-4 py-4 w-full">
-          <div className="flex justify-center">
-            <FilterSlider activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
-          <div className="flex flex-wrap gap-6 mt-4">
-            {expenses &&
-              expenses
-                .filter((expense) => expense.category == activeTab)
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .map((expense) => (
-                  <div key={expense._id}>
-                    <div className="bg-white shadow-md rounded-xl p-6  w-64   my-2 mx-0.5">
-                      <div className="flex items-center mb-2 ">
-                        <div
-                          className={`${
-                            colors[Math.floor(Math.random() * colors.length)]
-                          } rounded-xl w-10 h-10 flex items-center justify-center text-white`}
-                        >
-                          <FontAwesomeIcon icon={icons[expense.category]} />{" "}
-                        </div>
-                        <h2 className="ml-4 text-lg font-semibold">
+    <div className="flex bg-blue-700">
+      <SideDrawer isOpen={true} />
+      <div className="my-1.5 bg-gray-50 rounded-tl-3xl rounded-bl-3xl px-4 py-4" style={{width:"80%"}}>
+        <ChipSlider setActiveMonth={handleMonthClick} />
+        <div className="flex justify-start">
+          <FilterSlider
+            className="w-full"
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+        </div>
+        <div className="mt-4">
+          <table className=" divide-y divide-gray-200  w-full    ">
+            <thead className="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Description
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Amount
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Category
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {expenses &&
+                expenses
+                  .filter(
+                    (expense) =>
+                      activeTab === "All" || expense.category === activeTab
+                  ) // Added condition here
+                  .sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .map((expense) => (
+                    <tr key={expense._id} className="bg-white">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
                           {expense.name}
-                        </h2>
-                      </div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-xl text-gray-900">
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">
+                          {expense.description}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">
                           ₹ {expense.amount}
-                        </span>
-                        <span className="text-md text-gray-500">
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">
+                          {expense.category}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">
                           {new Date(expense.date).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div>{expense.description}</div>
-                    </div>
-                  </div>
-                ))}
-          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

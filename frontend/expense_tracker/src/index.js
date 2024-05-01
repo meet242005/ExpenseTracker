@@ -10,6 +10,8 @@ import { useCookies } from "react-cookie";
 import { loginUser } from "./Api";
 import { ToastContainer } from "react-toastify";
 import Myexpense from "./screens/Myexpense";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function RouteApp() {
   const [cookies, setCookie] = useCookies();

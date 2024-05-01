@@ -76,6 +76,12 @@ const FilterSlider = ({ activeTab, setActiveTab }) => {
         </i>
       </div>
       <ul className="tabs-box">
+      <li
+          className={`tab ${activeTab === "All" ? "active" : ""}`}
+          onClick={() => handleTabClick("All")}
+        >
+          All
+        </li>
         <li
           className={`tab ${activeTab === "Food & Dining" ? "active" : ""}`}
           onClick={() => handleTabClick("Food & Dining")}
