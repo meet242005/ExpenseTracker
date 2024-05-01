@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadUser } from "../Api";
 import SideDrawer from "../components/SideDrawer";
 import { updateBudget } from "../Api";
+import { toast } from "react-toastify";
 
 const SetBudget = () => {
   const userId = "6631684159792de2d56ad20d";
@@ -17,7 +18,7 @@ const SetBudget = () => {
     "Personal Care": 0,
     Others: 0,
   });
-  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(true);
+  const [isSideDrawerOpen] = useState(true);
 
   const loadUserProfile = async () => {
     console.log("Loading user...");
@@ -48,8 +49,17 @@ const SetBudget = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateBudget(userId, totalBudget, budgets);
-    window.alert("Budget updated successfully!");
-    
+    toast.success("Budget Updated Successfully! 💸 ", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
     console.log("Submitted Budgets:", budgets);
   };
 
@@ -69,6 +79,7 @@ const SetBudget = () => {
   return (
     <div className="flex bg-blue-700">
       <SideDrawer isOpen={isSideDrawerOpen} />
+
       <div className="my-1.5 bg-gray-50 rounded-tl-3xl rounded-bl-3xl px-4 py-4 w-full">
         <h2 className="text-xl font-bold mb-4">Set Budget</h2>
         <div className="grid grid-cols-2 gap-6">
@@ -95,7 +106,9 @@ const SetBudget = () => {
                   width: "100%",
                   height: "10px",
                   appearance: "none",
-                  background: `linear-gradient(to right,  #3B82F6 0%,  #3B82F6 ${value / 110}%, #d3d3d3 ${value / 100}%`,
+                  background: `linear-gradient(to right,  #3B82F6 0%,  #3B82F6 ${
+                    value / 110
+                  }%, #d3d3d3 ${value / 100}%`,
                   borderRadius: "5px",
                   outline: "none",
                   margin: "10px 0",
@@ -108,7 +121,9 @@ const SetBudget = () => {
             </div>
           ))}
         </div>
-        <h2 className="text-l font-bold mt-4">Total Monthly Budget: {totalBudget}</h2>
+        <h2 className="text-l font-bold mt-4">
+          Total Monthly Budget: {totalBudget}
+        </h2>
         <div className="flex justify-end mt-4">
           <button
             type="button"

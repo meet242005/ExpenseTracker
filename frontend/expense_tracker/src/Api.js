@@ -51,8 +51,8 @@ export const createExpense = async (name,amount,description,category,userId) => 
 };
 
 export const getExpensesByUser = async (userId, date) => {
-  return await fetchWithPost(`${SERVER_URL}getExpensesByUser`, {
+  return await fetchWithPost(`${SERVER_URL}loadExpenses`, {
     id: userId,
-    date,
+    date: date,
   });
 };

@@ -3,31 +3,26 @@ import CategoryCard from "./components/CategoryCard";
 import TotalCard from "./components/TotalCard";
 import SideDrawer from "./components/SideDrawer";
 import { PieChart } from "@mui/x-charts/PieChart";
+import moment from 'moment';
+
 import {
   faBathtub,
   faCheckCircle,
-  faCircle,
-  faClock,
-  faExpand,
-  faFootball,
-  faFootballBall,
-  faHeartPulse,
   faHospital,
   faHouse,
-  faOm,
-  faPerson,
   faToolbox,
   faTrain,
   faUmbrellaBeach,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
-import { loadStats } from "./Api.js";
+import { loadStats, getExpensesByUser } from "./Api.js";
+import DashboardExpenseCard from "./components/DashboardExpenseCard.js";
 
 const App = () => {
-  
   const [userId, setUserId] = useState("6631684159792de2d56ad20d");
 
   const [stats, setStats] = useState(null);
+  const [expenses, setExpenses] = useState(null);
 
   const fetchStats = async () => {
     try {
@@ -39,9 +34,23 @@ const App = () => {
     }
   };
 
+  const fetchExpenses = async () => {
+    const currentTime = moment().toISOString();
+    try {
+      console.log(currentTime)
+      const response = await getExpensesByUser(userId, currentTime.toString());
+      setExpenses(response.data);
+      console.log("Expenses:", response.data);
+    }
+    catch (error) {
+      console.error("Error loading expenses:", error);
+    }
+  };
+
   useEffect(() => {
     if (userId) {
       fetchStats();
+      fetchExpenses();
     }
   }, [userId]);
 
@@ -128,15 +137,26 @@ const App = () => {
                       label: "Others",
                     },
                   ],
-               
+
                   innerRadius: 30,
                   paddingAngle: 1,
                   cornerRadius: 5,
                 },
               ]}
-            
             />
           </div>
+        </div>
+        <h1 className="text-xl mb-2 mt-4 font-semibold text-gray-800">
+          Recent Expenses
+        </h1>
+        <div
+          className="flex justify-between"
+          style={{ overflowX: "auto", whiteSpace: "nowrap" }}
+        >
+          <DashboardExpenseCard
+          name={expenses?.[0]?.name}
+          
+          ></DashboardExpenseCard>
         </div>
         <h1 className="text-xl mb-2 mt-4 font-semibold text-gray-800">
           Category Spendings

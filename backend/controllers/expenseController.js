@@ -24,16 +24,18 @@ exports.getExpensesByUser = async (req, res) => {
 
         // Parse the month parameter to get the start and end dates
         const startDate = new Date(date);
-        const endDate = new Date(new Date(date).setMonth(startDate.getMonth() + 1));
+        const endDate = new Date(new Date(date).setMonth(startDate.getMonth() - 1));
 
         // Find expenses for the user within the specified month
         const expenses = await Expense.find({
             user: id,
             date: {
-                $gte: startDate,
-                $lt: endDate
+                $lte: startDate,
+                $gt: endDate
             }
-        });
+        }).sort({ date: -1 });
+
+
 
         res.status(200).json({
             status: 'success',
