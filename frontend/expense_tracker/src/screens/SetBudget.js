@@ -80,10 +80,7 @@ const SetBudget = () => {
   }, [budgets]);
 
   return (
-    <div className="flex bg-blue-700">
-      <SideDrawer isOpen={isSideDrawerOpen} />
-
-      <div className="my-1.5 bg-gray-50 rounded-tl-3xl rounded-bl-3xl px-4 py-4 w-full">
+    <div >
         <h2 className="text-xl font-bold mb-4">Set Budget</h2>
         <div className="grid grid-cols-2 gap-6">
           {Object.entries(budgets).map(([category, value]) => (
@@ -137,7 +134,7 @@ const SetBudget = () => {
           </button>
         </div>
       </div>
-    </div>
+   
   );
 };
 

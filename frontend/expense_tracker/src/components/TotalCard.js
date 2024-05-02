@@ -13,10 +13,13 @@ const TotalCard = ({ spends, totalBudget, allTotalSpends }) => {
       : percentageSpent < 80
       ? "h-full bg-yellow-500 rounded-full"
       : "h-full bg-red-500 rounded-full";
+      
+      const isMobile = window.innerWidth <= 768; 
+      var div_class = isMobile ? "bg-blue-600 shadow-md rounded-xl p-6 w-full h-56  my-0.5 mx-0.5" : "bg-blue-600 shadow-md rounded-xl p-6 w-96 h-56  my-0.5 mx-0.5";
   return (
     <div className="flex">
       
-      <div className="bg-blue-600 shadow-md rounded-xl p-6 w-96 h-56  my-0.5 mx-0.5">
+      <div className={div_class}>
         <div className="flex items-center mb-4">
           <h2 className="text-lg font-semibold text-white">Monthly Spends</h2>
         </div>

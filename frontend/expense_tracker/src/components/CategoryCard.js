@@ -11,10 +11,16 @@ const CategoryCard = ({ category, icon, spends, totalBudget }) => {
     percentageSpent < 50
       ? "h-full bg-green-500 rounded-full"
       : percentageSpent < 80
-      ? "h-full bg-yellow-500 rounded-full" :totalBudget==0?'h-full bg-gray-200 rounded-full'
+      ? "h-full bg-yellow-500 rounded-full"
+      : totalBudget == 0
+      ? "h-full bg-gray-200 rounded-full"
       : "h-full bg-red-500 rounded-full";
+
+  // Check screen width
+  const isMobile = window.innerWidth <= 768; 
+
   return (
-    <div className="bg-white shadow-md rounded-xl p-6  w-64   my-2 mx-0.5">
+    <div className={`bg-white shadow-md rounded-xl p-6 w-full my-2 mx-0.5`}>
       <div className="flex items-center mb-4">
         <div className="bg-blue-500 rounded-xl w-10 h-10 flex items-center justify-center text-white">
           <FontAwesomeIcon icon={icon} /> {/* Use FontAwesomeIcon component */}

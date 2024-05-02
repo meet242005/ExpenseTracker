@@ -36,10 +36,7 @@ const AddExpensePopup = () => {
 
 
   return (
-    <div className="flex  bg-blue-700">
-      <SideDrawer isOpen={isSideDrawerOpen} />
-
-      <div className="my-1.5  bg-gray-50  rounded-tl-3xl rounded-bl-3xl px-4 py-4   w-full">
+    <div >
         <h2 className="text-xl font-bold mb-4">Add Expense</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 bg-white p-4 rounded-lg shadow-sm">
@@ -127,7 +124,7 @@ const AddExpensePopup = () => {
           </div>
         </form>
       </div>
-    </div>
+
   );
 };
 

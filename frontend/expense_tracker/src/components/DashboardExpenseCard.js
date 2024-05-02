@@ -8,7 +8,7 @@ const DashboardExpenseCard = ({ name, amount, category,date }) => {
   };
  
   return (
-    <div className="bg-white shadow-md rounded-xl p-3 w-64 h-28 my-2 mx-0.5">
+    <div className="bg-white shadow-md rounded-xl p-3 w-full h-28 my-2 mx-0.5">
   <div className="flex items-center mb-4">
     <div className="h-10 w-10 bg-gray-500 text-white rounded-xl flex justify-center items-center">
       {getInitials(name)}
