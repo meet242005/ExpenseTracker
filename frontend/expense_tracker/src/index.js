@@ -23,7 +23,7 @@ function RouteApp() {
 
   // Conditionally render the side drawer based on the current route
   const renderSideDrawer = () => {
-    if (location.pathname === "/login") {
+    if (location.pathname === "/login" || location.pathname === "/") {
       return null; // Don't render side drawer on login page
     }
     return <SideDrawer isOpen={isDrawerOpen} onClose={toggleDrawer} />;
