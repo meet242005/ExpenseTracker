@@ -19,8 +19,8 @@ const DashboardExpenseCard = ({ name, amount, category,date }) => {
   </div>
   <div className="flex flex-col">
     <div className="flex justify-between mb-4">
-      <h3 className="ml-0 text-gray-600">₹ {amount} </h3>
-      <span className="ml-2 bg-blue-500 px-2 py-1 rounded-2xl text-white text-sm">
+      <h3 className="ml-0 text-gray-600 ">₹ {amount} </h3>
+      <span className="ml-2 bg-blue-500 px-2 py-1 rounded-2xl text-white text-sm overflow-hidden overflow-ellipsis whitespace-nowrap">
         {category}
       </span>
     </div>

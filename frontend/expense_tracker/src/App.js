@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { loadStats, getExpensesByUser, loginUser } from "./Api.js";
 import DashboardExpenseCard from "./components/DashboardExpenseCard.js";
+import MyPieChart from "./components/MyPieChart.js";
 
 const icons = {
   "Food & Dining": faUtensils,
@@ -82,7 +83,8 @@ const App = () => {
           allTotalSpends={stats?.totalSpendAllTime}
         />
         <div className="bg-white shadow-md rounded-xl p-0 flex-grow h-56 my-2 md:my-0.5 flex justify-center">
-          <PieChart
+          {/* <PieChart
+
             series={[
               {
                 data: [
@@ -156,7 +158,8 @@ const App = () => {
                 paddingAngle: 1,
                 cornerRadius: 5,
               },
-            ]}
+            ]} */}
+            <MyPieChart stats={stats}
           />
         </div>
       </div>

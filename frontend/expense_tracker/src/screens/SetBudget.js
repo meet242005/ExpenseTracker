@@ -79,12 +79,14 @@ const SetBudget = () => {
     );
   }, [budgets]);
 
+  const isMobile = window.innerWidth <= 768; 
+  var div_class = isMobile ? "flex-col" : "grid grid-cols-2 gap-6";
   return (
     <div >
         <h2 className="text-xl font-bold mb-4">Set Budget</h2>
-        <div className="grid grid-cols-2 gap-6">
+        <div className={div_class}>
           {Object.entries(budgets).map(([category, value]) => (
-            <div key={category} className="bg-white shadow-lg rounded-lg p-2">
+            <div key={category} className="bg-white shadow-sm rounded-lg p-2 mt-2">
               <label
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor={category}
