@@ -6,8 +6,8 @@ import  login  from "../assets/login.svg";
 
 const LoginSignupPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [cookies, setCookie] = useCookies();
-  const [error, setError] = useState(null);
+  const [setCookie] = useCookies();
+  const [setError] = useState(null);
   const navigate = useNavigate();
 
   const toggleForm = () => {
@@ -30,7 +30,7 @@ const LoginSignupPage = () => {
         const userData = await response.data;
 
         setCookie("userId", userData); 
-        if(response.status == "success")
+        if(response.status === "success")
         {
             navigate("/dashBoard", { replace: true })
         }
@@ -39,7 +39,7 @@ const LoginSignupPage = () => {
         const response = await createUser(username, email, password);
         const userData = await response.data;
         setCookie("userId", userData);
-          if(response.status == "success")
+          if(response.status ==="success")
         {
             navigate("/dashBoard", { replace: true })
         }

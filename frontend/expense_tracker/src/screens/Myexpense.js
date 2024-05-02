@@ -1,56 +1,16 @@
 import React, { useEffect, useState } from "react";
 import FilterSlider from "../components/filter/FilterSlider";
 import SideDrawer from "../components/SideDrawer";
-import { getExpensesByUser, loadStats } from "../Api";
+import { getExpensesByUser } from "../Api";
 import moment from "moment";
 import { useCookies } from "react-cookie";
 import ChipSlider from "../components/chipfilter/chipSlider";
-import {
-  faBathtub,
-  faCheckCircle,
-  faHospital,
-  faHouse,
-  faToolbox,
-  faTrain,
-  faUmbrellaBeach,
-  faUtensils,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const icons = {
-  "Food & Dining": faUtensils,
-  Housing: faHouse,
-  Transportation: faTrain,
-  Healthcare: faHospital,
-  Entertainment: faUmbrellaBeach,
-  Utilities: faBathtub,
-  "Personal Care": faCheckCircle,
-  Others: faToolbox,
-};
-
-const colors = [
-  "bg-blue-500",
-  "bg-red-500",
-  "bg-green-500",
-  "bg-yellow-500",
-  "bg-indigo-500",
-  "bg-purple-500",
-  "bg-pink-500",
-  "bg-cyan-500",
-  "bg-rose-500",
-  "bg-lime-500",
-  "bg-teal-500",
-  "bg-amber-500",
-  "bg-fuchsia-500",
-  "bg-emerald-500",
-  "bg-gray-500",
-  "bg-orange-500",
-];
 
 const Myexpense = () => {
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies] = useCookies();
   const [activeTab, setActiveTab] = useState("All");
-  const [userId, setUserId] = useState(cookies.userId);
+  const [userId] = useState(cookies.userId);
   const [expenses, setExpenses] = useState(null);
   const [activeMonth, setActiveMonth] = useState(moment().toISOString());
 

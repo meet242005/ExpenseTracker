@@ -16,7 +16,7 @@ import {
   faUmbrellaBeach,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
-import { loadStats, getExpensesByUser, loginUser } from "./Api.js";
+import { loadStats, getExpensesByUser } from "./Api.js";
 import DashboardExpenseCard from "./components/DashboardExpenseCard.js";
 
 const icons = {
@@ -31,8 +31,8 @@ const icons = {
 };
 
 const App = () => {
-  const [cookies, setCookie, removeCookie] = useCookies();
-  const [userId, setUserId] = useState(cookies.userId);
+  const [cookies] = useCookies();
+  const [userId] = useState(cookies.userId);
 
   const [stats, setStats] = useState(null);
   const [expenses, setExpenses] = useState(null);

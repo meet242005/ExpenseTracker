@@ -13,8 +13,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SideDrawer = ({ isOpen, onClose }) => {
-  const [cookies, setCookie, removeCookie] = useCookies();
-  const [userId, setUserId] = useState(cookies.userId);
+  const [cookies, removeCookie] = useCookies();
+  const [userId] = useState(cookies.userId);
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);

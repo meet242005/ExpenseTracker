@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import {useCookies} from 'react-cookie';
 
 const SetBudget = () => {
-  const [cookies, setCookie, removeCookie] = useCookies();
-  const [userId, setUserId] = useState(cookies.userId);
+  const [cookies] = useCookies();
+  const [userId] = useState(cookies.userId);
 
   const [totalBudget, setTotalBudget] = useState(0);
   const [user, setUser] = useState(null);
