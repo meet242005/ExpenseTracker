@@ -18,8 +18,8 @@ const fetchWithPost = async (url, body) => {
   }
 };
 
-export const createUser = async (userData) => {
-  return await fetchWithPost(`${SERVER_URL}createUser`, userData);
+export const createUser = async (username, email, password) => {
+  return await fetchWithPost(`${SERVER_URL}createUser`, {username: username, email: email, password: password });
 };
 
 export const loadUser = async (userId) => {

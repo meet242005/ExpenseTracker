@@ -30,6 +30,11 @@ const SideDrawer = ({ isOpen, onClose }) => {
     }
   };
 
+  const handleLogout = () => {
+    removeCookie("userId");
+    navigate("/login", { replace: true });
+  }
+
   useEffect(() => {
     if (!user) {
       loadUserProfile();
@@ -55,7 +60,7 @@ const SideDrawer = ({ isOpen, onClose }) => {
           <ul>
             <li
               className="text-white py-2"
-              onClick={() => navigate("/", { replace: true })}
+              onClick={() => navigate("/dashBoard", { replace: true })}
             >
               <FontAwesomeIcon className="pr-2" icon={faTachometerAlt} />{" "}
               Dashboard
@@ -100,7 +105,7 @@ const SideDrawer = ({ isOpen, onClose }) => {
 
         <div
           className="text-l pt-5 text-white flex justify-between"
-          onClick={() => removeCookie("userId")}
+          onClick={() => handleLogout()}
         >
           Logout <FontAwesomeIcon className="pt-1" icon={faSignOut} />
         </div>

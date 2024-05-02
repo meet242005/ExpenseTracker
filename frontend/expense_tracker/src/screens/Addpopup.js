@@ -42,7 +42,7 @@ const AddExpensePopup = () => {
       <div className="my-1.5  bg-gray-50  rounded-tl-3xl rounded-bl-3xl px-4 py-4   w-full">
         <h2 className="text-xl font-bold mb-4">Add Expense</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-sm">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="name"
@@ -59,7 +59,7 @@ const AddExpensePopup = () => {
               required
             />
           </div>
-          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-sm">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="amount"
@@ -76,7 +76,7 @@ const AddExpensePopup = () => {
               required
             />
           </div>
-          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-sm">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="description"
@@ -92,7 +92,7 @@ const AddExpensePopup = () => {
               required
             />
           </div>
-          <div className="mb-4 bg-white p-4 rounded-lg shadow-lg">
+          <div className="mb-4 bg-white p-4 rounded-lg shadow-sm">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="category"
