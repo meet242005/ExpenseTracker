@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import {useCookies} from 'react-cookie';
 
 const AddExpensePopup = () => {
-  const [cookies] = useCookies();
-  const [userId] = useState(cookies.userId);
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [userId, setUserId] = useState(cookies.userId);
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");

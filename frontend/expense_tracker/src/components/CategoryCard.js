@@ -11,7 +11,7 @@ const CategoryCard = ({ category, icon, spends, totalBudget }) => {
     percentageSpent < 50
       ? "h-full bg-green-500 rounded-full"
       : percentageSpent < 80
-      ? "h-full bg-yellow-500 rounded-full" :totalBudget===0?'h-full bg-gray-200 rounded-full'
+      ? "h-full bg-yellow-500 rounded-full" :totalBudget==0?'h-full bg-gray-200 rounded-full'
       : "h-full bg-red-500 rounded-full";
   return (
     <div className="bg-white shadow-md rounded-xl p-6  w-64   my-2 mx-0.5">

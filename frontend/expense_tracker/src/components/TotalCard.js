@@ -1,4 +1,5 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TotalCard = ({ spends, totalBudget, allTotalSpends }) => {
   // Calculate percentage spent
